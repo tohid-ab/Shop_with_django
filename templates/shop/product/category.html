@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            product list
+        {% endblock title %}
+    </title>
+</head>
+<body>
+{% block content %}
+    <div class='row'>
+    <div class='col-4'>
+        <ul class="list-group">
+            <li class="list-group-item active" aria-current="true">دسته بندی ها</li>
+            {% for categoory in category_s %}
+                <li class="list-group-item">{{ categoory.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class='col-8'>
+    {% if category_posts %}
+        {% for product in category_posts %}
+                        <div class="card" style="width: 18rem;">
+                            <img src="media/{{ product.image }}" class="card-img-top" alt="..." style="height: 24vh;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p class="card-text">{{ product.price }}</p>
+                                    <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                        </div>
+        {% endfor %}
+    {% else %}
+        <P>این دسته بندی خالی میباشد</p>
+    {% endif %}
+    </div>
+    </div>
+{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,11 @@
+.row{
+    margin-top: 50px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.card{
+    display: inline-flex;
+    margin-bottom: 1rem;
+    text-align: right;
+}

@@ -1,0 +1,62 @@
+{% extends 'shop/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+        Shopping Cart
+    {% endblock title %}</title>
+</head>
+<body>
+{% block content %}
+     <div id="paypal-button-container"></div>
+
+        <!-- Include the PayPal JavaScript SDK -->
+            <script src="https://www.paypal.com/sdk/js?client-id=ASL95rCO3l_aYPHGoHtHTSoZprYOa-RPYW8C4UkPwZg9wnprTWTzjGQiKhAwHn6YDUL4BlEKhBGr7D-T&currency=USD"></script>
+
+            <script>
+                    {#var total = '{{ cart.get_total_price }}'#}
+                    function compeleteOrder(){
+                        var url = 'complete'
+
+                        fetch(url, {
+                            method:'POST',
+                            headers:{
+                                'Content-type':'application/json',
+                                'X-CSRFToken':csrftoken,
+                            },
+                            body:JSON.stringify({'OrderID': OrderID})
+                        })
+                    }
+
+
+                    paypal.Buttons({
+                        // Set up the transaction
+                        createOrder: function(data, actions) {
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: 150
+                                    }
+                                }]
+                            });
+                        },
+
+                        // Finalize the transaction
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(orderData) {
+                                // Successful capture! For demo purposes:
+                                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                var transaction = orderData.purchase_units[0].payments.captures[0];
+                                compeleteOrder()
+                                alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                            });
+                        }
+
+
+                    }).render('#paypal-button-container');
+                </script>
+{% endblock content %}
+
+</body>
+</html>

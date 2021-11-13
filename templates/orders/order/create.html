@@ -1,0 +1,34 @@
+{% extends 'shop/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+        Shopping Cart
+    {% endblock title %}</title>
+</head>
+<body>
+{% block content %}
+    <h1>تکمیل پرداخت</h1>
+    <hr>
+    <ul>
+        {% for item in cart %}
+            <li>
+                {% with product=item.product %}
+                    <img style="width:50px;" src="{{ product.image.url }}" alt="">
+                {% endwith %}
+                {{ item.product.name }} - {{ item.quantity }}x
+                <span>{{ item.total_price }}</span>
+            </li>
+
+        {% endfor %}
+    </ul>
+    <hr>
+    <form method="POST">
+        {{ form.as_p }}
+           <input type="submit" value="Order">
+        {% csrf_token %}
+    </form>
+{% endblock content %}
+</body>
+</html>

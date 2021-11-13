@@ -1,0 +1,38 @@
+{% extends 'shop/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            product list
+        {% endblock title %}
+    </title>
+</head>
+<body>
+{% block content %}
+    <div class='row'>
+    <div class='col-4'>
+        <ul class="list-group">
+            <li class="list-group-item active" aria-current="true">دسته بندی ها</li>
+            {% for categoory in categories %}
+                <li class="list-group-item"><a href="{{ categoory.get_absolute_url }}">{{ categoory.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class='col-8'>
+    {% for product in products %}
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="..." style="height: 24vh;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">{{ product.price }}</p>
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-primary">مشاهده محصول</a>
+                            </div>
+                    </div>
+    {% endfor %}
+    </div>
+    </div>
+{% endblock content %}
+</body>
+</html>

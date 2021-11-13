@@ -1,0 +1,16 @@
+{% extends 'shop/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+        Shopping Cart
+    {% endblock title %}</title>
+</head>
+<body>
+{% block content %}
+    <h1>ممنون از خرید شما</h1>
+    <h2>شماره پیگیری خرید {{ order.id }}</h2>
+{% endblock content %}
+</body>
+</html>
