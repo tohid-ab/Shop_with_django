@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'orders',
     'paypal.standard.ipn',
     'widget_tweaks',
+    'cupons'
 ]
 
 MIDDLEWARE = [
