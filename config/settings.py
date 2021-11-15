@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'django_static_fontawesome',
     'cart',
     'orders',
-    'paypal.standard.ipn'
+    'paypal.standard.ipn',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -145,17 +146,19 @@ MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-PAYPAL_RECEIVER_EMAIL = 'sonalis.packtpub-test1@gmail.com'
-PAYPAL_TEST = True
 
-
-BRAINTREE_MERCHANT_ID = 'XXX' # Merchant ID
-BRAINTREE_PUBLIC_KEY = 'XXX' # Public Key
-BRAINTREE_PRIVATE_KEY = 'XXX' # Private key
-
-BRAINTREE_CONF = braintree.Configuration(
-     braintree.Environment.Sandbox,
-     BRAINTREE_MERCHANT_ID,
-     BRAINTREE_PUBLIC_KEY,
-     BRAINTREE_PRIVATE_KEY
-)
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# PAYPAL_RECEIVER_EMAIL = 'sonalis.packtpub-test1@gmail.com'
+# PAYPAL_TEST = True
+#
+#
+# BRAINTREE_MERCHANT_ID = 'XXX' # Merchant ID
+# BRAINTREE_PUBLIC_KEY = 'XXX' # Public Key
+# BRAINTREE_PRIVATE_KEY = 'XXX' # Private key
+#
+# BRAINTREE_CONF = braintree.Configuration(
+#      braintree.Environment.Sandbox,
+#      BRAINTREE_MERCHANT_ID,
+#      BRAINTREE_PUBLIC_KEY,
+#      BRAINTREE_PRIVATE_KEY
+# )

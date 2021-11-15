@@ -60,7 +60,11 @@
     </table>
     <p style="margin: 13px 137px;">
         <a href="{% url 'shop:list' %}" class="btn btn-primary">ادامه خرید</a>
-        <a href="{% url 'order:order_create' %}" class="btn btn-success">پرداخت</a>
+        {% if cart %}
+            <a href="{% url 'order:order_create' %}" class="btn btn-success">پرداخت</a>
+            {% else %}
+            <a href="#"></a>
+        {% endif %}
     </p>
 {% endblock content %}
 </body>

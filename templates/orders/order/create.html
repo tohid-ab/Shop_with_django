@@ -1,4 +1,5 @@
 {% extends 'shop/base.html' %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,24 +12,70 @@
 {% block content %}
     <h1>تکمیل پرداخت</h1>
     <hr>
-    <ul>
-        {% for item in cart %}
-            <li>
-                {% with product=item.product %}
-                    <img style="width:50px;" src="{{ product.image.url }}" alt="">
-                {% endwith %}
-                {{ item.product.name }} - {{ item.quantity }}x
-                <span>{{ item.total_price }}</span>
-            </li>
+{% if cart %}
 
-        {% endfor %}
-    </ul>
-    <hr>
-    <form method="POST">
-        {{ form.as_p }}
-           <input type="submit" value="Order">
+    <div class="container">
+      <div class="row">
+          <div class="col-sm">
+            <form method="POST" class="row g-3">
         {% csrf_token %}
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">نام</label>
+            {% render_field form.first_name|add_class:"form-control" placeholder="نام" %}
+        </div>
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">نام خانوادگی</label>
+            {% render_field form.last_name|add_class:"form-control" placeholder="نام خانوادگی" %}
+        </div>
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">ایمیل</label>
+            {% render_field form.email|add_class:"form-control" placeholder="ایمیل" %}
+        </div>
+        <div class="col-md-6">
+            <label for="inputZip" class="form-label">کد پستی</label>
+            {% render_field form.postal_code|add_class:"form-control" placeholder="کد پستی" %}
+        </div>
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">ایمیل</label>
+            {% render_field form.address|add_class:"form-control" placeholder="آدرس" %}
+        </div>
+        <div class="col-md-6">
+            <label for="inputCity" class="form-label">شهر</label>
+            {% render_field form.city|add_class:"form-control" placeholder="شهر" %}
+        </div>
+        <div class="col-12">
+        <button type="submit" class="btn btn-primary">پرداخت</button>
+        </div>
+
     </form>
+          </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    Featured
+                </div>
+
+                <ul class="list-group list-group-flush">
+                {% for item in cart %}
+                    <li class="list-group-item">
+                        {% with product=item.product %}
+                            <img style="width:50px;" src="{{ product.image.url }}" alt="">
+                        {% endwith %}
+                        <span>{{ item.product.name }} | {{ item.quantity }} | {{ item.price }}</span>
+                    </li>
+                {% endfor %}
+                    <li class="list-group-item">مجموع قیمت : {{ cart.get_total_price }}</li>
+                </ul>
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+    {% else %}
+    <p>سبد خرید شما خالی است</p>
+{% endif %}
 {% endblock content %}
 </body>
 </html>
