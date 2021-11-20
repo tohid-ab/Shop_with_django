@@ -27,7 +27,7 @@ class Products(models.Model):
     image = models.ImageField(
         upload_to='products/%Y/%m/%d', blank=True, verbose_name='عکس')
     description = models.TextField(blank=True, verbose_name='متن')
-    price = models.FloatField(verbose_name='قیمت')
+    price = models.IntegerField(verbose_name='قیمت')
     available = models.BooleanField(default=True, verbose_name='موجوده')
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)

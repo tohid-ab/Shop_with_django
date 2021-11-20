@@ -4,6 +4,8 @@ from .cart import *
 from shop.models import *
 from django.shortcuts import get_object_or_404, redirect
 from .forms import CartAddProductForm
+from cupons.forms import CouponApply
+
 # Create your views here.
 
 
@@ -28,9 +30,10 @@ def cart_remov(request, product_id):
 
 def cart_detail(request):
     cart = Cart(request)
+    coupon_apply_form = CouponApply()
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(initial={
             'quantity': item["quantity"],
             "override": True
         })
-    return render(request, 'cart/detail.html', {'cart': cart})
+    return render(request, 'cart/detail.html', {'cart': cart, 'form': coupon_apply_form})

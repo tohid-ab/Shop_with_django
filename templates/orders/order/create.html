@@ -50,7 +50,7 @@
     </form>
           </div>
         <div class="col-sm">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem; top: 16%">
                 <div class="card-header">
                     Featured
                 </div>
@@ -64,7 +64,12 @@
                         <span>{{ item.product.name }} | {{ item.quantity }} | {{ item.price }}</span>
                     </li>
                 {% endfor %}
+                {% if cart.coupon %}
+                    <li class="list-group-item">مجموع قیمت با تخفیف: {{ cart.get_total_price_after_discount}}</li>
+                    {% else %}
                     <li class="list-group-item">مجموع قیمت : {{ cart.get_total_price }}</li>
+                {% endif %}
+
                 </ul>
 
             </div>

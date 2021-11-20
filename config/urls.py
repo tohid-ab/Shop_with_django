@@ -23,5 +23,5 @@ urlpatterns = [
     path('', include('shop.urls', namespace='shop')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('order/', include('orders.urls', namespace='order')),
-    # path('paypal/', include('paypal.standard.ipn.urls', namespace='paypal')),
+    path('coupon/', include('cupons.urls', namespace='coupon')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

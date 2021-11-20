@@ -56,6 +56,13 @@
                 <td colspan="4"></td>
                 <td>{{ cart.get_total_price }}</td>
             </tr>
+            {% if cart.coupon %}
+                <tr>
+                    <td>مقدار تخفیف : </td>
+                    <td colspan="4">{{ cart.coupon.discout }} %</td>
+                    <td>{{ cart.get_total_price_after_discount }}</td>
+                </tr>
+            {% endif %} 
         </tbody>
     </table>
     <p style="margin: 13px 137px;">
@@ -66,6 +73,12 @@
             <a href="#"></a>
         {% endif %}
     </p>
+    <p>کد تخفیف</p>
+    <form method="post" action="{% url 'coupon:apply' %}">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button class="btn btn-success">apply</button>
+    </form>
 {% endblock content %}
 </body>
 </html>
