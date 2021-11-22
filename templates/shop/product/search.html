@@ -11,19 +11,10 @@
 </head>
 <body>
 {% block content %}
-{#    <div class='row'>#}
-{#    <div class='col-4'>#}
-{#        <ul class="list-group">#}
-{#            <li class="list-group-item active" aria-current="true">دسته بندی ها</li>#}
-{#            {% for categoory in categories %}#}
-{#                <li class="list-group-item"><a href="{{ categoory.get_absolute_url }}">{{ categoory.name }}</a></li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-{#    </div> #}
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-    {% for product in products %}
+    {% for product in object_list %}
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
@@ -43,6 +34,8 @@
                             </div>
                         </div>
                     </div>
+        {% empty %}
+                                <p>محصولی یافت نشد</p>
     {% endfor %}
         </div>
     </div>
