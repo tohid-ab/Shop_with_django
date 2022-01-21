@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 from .models import Coupons
 from .forms import CouponApply
+from django.contrib import messages
 # Create your views here.
 
 
@@ -15,7 +16,10 @@ def coupon_apply(request):
         try:
             coupon = Coupons.objects.get(code__iexact=code, valid_from__lte=now, valid_to__gte=now, active=True)
             request.session['coupon_id'] = coupon.id
+            messages.success(request, 'کد شما اعمال شد')
+
         except:
             request.session['coupon_id'] = None
+            messages.error(request, 'خطا')
 
     return redirect('cart:cart_detail')

@@ -1,5 +1,6 @@
 from django.db import models
 from shop.models import Products
+from django.conf import settings
 # Create your models here.
 
 
@@ -16,6 +17,8 @@ class Order(models.Model):
 
     class Meta:
         ordering = ('-created',)
+        verbose_name = 'سفارش'
+        verbose_name_plural = 'سفارش ها'
 
     def __str__(self):
         return f'Order {self.id}'
@@ -25,10 +28,11 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_order', on_delete=models.CASCADE, default="")
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Products, related_name='order_items', on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
-    quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=1, verbose_name='تعداد')
 
     def __str__(self):
         return f'{self.id}'

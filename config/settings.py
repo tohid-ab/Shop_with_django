@@ -46,9 +46,9 @@ INSTALLED_APPS = [
     'django_static_fontawesome',
     'cart',
     'orders',
-    'paypal.standard.ipn',
     'widget_tweaks',
-    'cupons'
+    'cupons',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -118,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'Asia/Tehran'
 
@@ -148,6 +148,8 @@ MEDIA_URL = '/media/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
+LOGIN_REDIRECT_URL = 'shop:list'
+LOGOUT_REDIRECT_URL = 'login'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # PAYPAL_RECEIVER_EMAIL = 'sonalis.packtpub-test1@gmail.com'
 # PAYPAL_TEST = True

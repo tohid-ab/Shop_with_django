@@ -46,15 +46,17 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop:list' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop:list' %}">خانه</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">درباره ما</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">دسته بندی</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                <li><a class="dropdown-item" href="#">همه محصولات</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                                {% for category in categories %}
+                                    <li><a class="dropdown-item" href="#">{{ category.name }}</a></li>
+                                {% endfor %}
+
                             </ul>
                         </li>
                     </ul>
@@ -71,12 +73,34 @@
                     <form class="d-flex" action="{% url 'cart:cart_detail' %}">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="fas fa-shopping-cart"></i>
-                            Cart
+                            سبد خرید
                             {% if request.session.cart %}
                             <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart|length }}</span>
                             {% endif %}
                         </button>
                     </form>
+                    {% if user.is_authenticated %}
+                        <ul class="navbar-nav" style="margin-left: 5px;margin-block-end: 1em;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user }}</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">پروفایل</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">خروج</a></li>
+                            </ul>
+                        </li>
+                        </ul>
+                    {% else %}
+                        <div class="d-flex" style="margin-top: 0;margin-block-end: 1em;margin-left: 5px">
+                            <a href="{% url 'login' %}">
+
+                                <button class="btn btn-outline-danger">
+                                ورود
+                            </button>
+
+                            </a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </nav>

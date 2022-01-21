@@ -9,3 +9,35 @@
     margin-bottom: 1rem;
     text-align: right;
 }
+
+.coupon-style{
+    width: 22%;
+    padding: 14px;
+    border: 1px solid #d0d0d0;
+    margin: 0 160px;
+    direction: rtl;
+}
+
+.user_input{
+    display: block;
+    margin: 26px auto;
+}
+
+.login_class{
+    text-align: center;
+    width: 50%;
+    border: 1px solid silver;
+    margin: 68px auto;
+    padding: 43px;
+    border-radius: 7px;
+    box-shadow: 0 5px 6px -3px grey;
+    direction: rtl;
+}
+
+.coupon-text{
+    background: #d5d5d5;
+    color: black;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #9c9c9c;
+}

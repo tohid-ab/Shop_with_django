@@ -56,24 +56,6 @@
                 <td colspan="4"></td>
                 <td>{{ cart.get_total_price }}</td>
             </tr>
-            <tr>
-                <td colspan="6">
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            افزودن کد تخفیف
-                          </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body">
-
-                          </div>
-                        </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
             {% if cart.coupon %}
                 <tr>
                     <td>مقدار تخفیف : </td>
@@ -84,19 +66,29 @@
         </tbody>
     </table>
     <p style="margin: 13px 137px;">
-        <a href="{% url 'shop:list' %}" class="btn btn-primary">ادامه خرید</a>
+        <a href="{% url 'shop:list' %}" class="btn btn-dark">ادامه خرید</a>
         {% if cart %}
-            <a href="{% url 'order:order_create' %}" class="btn btn-success">پرداخت</a>
+            <a href="{% url 'order:order_create' %}" class="btn btn-danger  ">پرداخت</a>
             {% else %}
             <a href="#"></a>
         {% endif %}
     </p>
-    <p>کد تخفیف</p>
-    <form method="post" action="{% url 'coupon:apply' %}">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button class="btn btn-success">apply</button>
-    </form>
+    <div class="coupon-style">
+        <p>کد تخفیف</p>
+        <p class="coupon-text">
+            {% if messages %}
+                {% for foo in messages %}
+                    {{ foo }}
+                {% endfor %}
+
+            {% endif %}
+        </p>
+        <form method="post" action="{% url 'coupon:apply' %}">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button class="btn btn-dark">تایید</button>
+        </form>
+    </div>
 {% endblock content %}
 </body>
 </html>

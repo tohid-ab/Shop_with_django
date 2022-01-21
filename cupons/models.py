@@ -10,5 +10,9 @@ class Coupons(models.Model):
     discout = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     active = models.BooleanField()
 
+    class Meta:
+        verbose_name = 'کد تخفیف'
+        verbose_name_plural = 'کد تخفیف ها'
+
     def __str__(self):
         return self.code

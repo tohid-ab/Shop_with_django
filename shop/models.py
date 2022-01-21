@@ -36,7 +36,7 @@ class Products(models.Model):
         return reverse('shop:product_detail', args=[self.id, self.slug])
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('-created',)
         index_together = (('id', 'slug'),)
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'

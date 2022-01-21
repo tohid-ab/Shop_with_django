@@ -14,6 +14,8 @@ from django.template.loader import render_to_string
 
 def order_create(request):
     cart = Cart(request)
+    if not request.user.is_authenticated:
+        return redirect("login")
     if request.method == 'POST':
         form = OrderCreateform(request.POST)
         if form.is_valid():
@@ -22,7 +24,8 @@ def order_create(request):
                 OrderItem.objects.create(order=order,
                                          product=item['product'],
                                          price=item['price'],
-                                         quantity=item['quantity'])
+                                         quantity=item['quantity'],
+                                         user=request.user)
             cart.clear()
             order_created.delay(order.id)
             return render(request, 'orders/order/created.html', {'order': order})

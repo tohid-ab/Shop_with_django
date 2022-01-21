@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="login_class">
+    <h1>ثبت نام در سایت</h1>
+    <div class="login-form">
+        <form action="{% url 'register' %}" method="post">
+            {% render_field user_form.username|add_class:"user_input" placeholder="نام کاربری" %}
+            {% render_field user_form.first_name|add_class:"user_input" placeholder="نام" %}
+            {% render_field user_form.last_name|add_class:"user_input" placeholder="نام خانوادگی" %}
+            {% render_field user_form.email|add_class:"user_input" placeholder="ایمیل" %}
+            {% render_field user_form.password|add_class:"user_input" placeholder="رمز عبور" %}
+            {% render_field user_form.password2|add_class:"user_input" placeholder="تکرار رمز عبور" %}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input type="submit" class="btn btn-success" value="ثبت نام"></p>
+            <p><a href="{% url 'login' %}">ورود</a> </p>
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -42,6 +42,7 @@ class SearchBox(ListView):
         object_list = self.model.objects.filter(Q(name__icontains=query))
         return object_list
 
+
 def category(request, slug):
     category_posts = Products.objects.filter(category__slug=slug, available=True)
     category_s = Category.objects.filter(slug=slug)
