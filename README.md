@@ -8,7 +8,7 @@ $ virtualenv custom_name
 ## activate virtualenv
 $ sourc custom_name/Scripts/activate
 
-$ pip install -r requirements.txt
+$ pip install -r package.txt
 
 $ python manage.py runserver
 
